@@ -14,4 +14,18 @@
         tools:showIn="@layout/activity_main"
         tools:context="ru.sberbank.sokomishalov.androidapp.MainActivity">
 
+    <TextView
+            android:text="Это мое первое приложение под Андроид"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp" android:id="@+id/textView" android:layout_below="@+id/button2"
+            android:layout_centerHorizontal="true"/>
+    <Button
+            android:text="Привет, чепуш"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button2"
+            android:onClick="onButtonClick"
+            android:layout_marginTop="49dp" android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
 </RelativeLayout>
