@@ -42,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void onOperationButtonClick(View view){
+        for (Button operationButton : operationButtons) {
+            if (operationButton.getId() == view.getId()){
+                this.textView.setText(this.textView.getText().toString() + "" + operationButton.getText().toString());
+            }
+        }
+    }
+
     private void fillNumberButtons(){
         this.numberButtons = new ArrayList<>();
         this.numberButtons.add((Button) findViewById(R.id.buttonZero));

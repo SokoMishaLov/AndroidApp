@@ -15,7 +15,7 @@
         tools:context="ru.sberbank.sokomishalov.androidapp.activities.MainActivity">
 
     <Button
-            android:text="0"
+            android:text="@string/_0"
             android:background="@drawable/gray_button"
             android:layout_height="60dp"
             android:layout_width="120dp"
@@ -24,7 +24,7 @@
             android:layout_alignParentStart="true"
             android:id="@+id/buttonZero"/>
     <Button
-            android:text="1"
+            android:text="@string/_1"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -33,7 +33,7 @@
             android:layout_marginBottom="136dp"
             android:layout_alignParentBottom="true" android:layout_alignParentStart="true"/>
     <Button
-            android:text="2"
+            android:text="@string/_2"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -42,7 +42,7 @@
             android:layout_toEndOf="@+id/buttonOne"
             android:id="@+id/buttonTwo"/>
     <Button
-            android:text="3"
+            android:text="@string/_3"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:onClick="onNumberButtonClick"
@@ -51,7 +51,7 @@
             android:layout_toEndOf="@+id/buttonTwo"
             android:id="@+id/buttonThree"/>
     <Button
-            android:text="4"
+            android:text="@string/_4"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -60,7 +60,7 @@
             android:layout_above="@+id/buttonOne"
             android:layout_alignParentStart="true"/>
     <Button
-            android:text="5"
+            android:text="@string/_5"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -69,7 +69,7 @@
             android:layout_toEndOf="@+id/buttonOne"
             android:id="@+id/buttonFive"/>
     <Button
-            android:text="6"
+            android:text="@string/_6"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -78,7 +78,7 @@
             android:layout_toEndOf="@+id/buttonTwo"
             android:id="@+id/buttonSix"/>
     <Button
-            android:text="7"
+            android:text="@string/_7"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -87,7 +87,7 @@
             android:layout_alignParentStart="true"
             android:id="@+id/buttonSeven"/>
     <Button
-            android:text="8"
+            android:text="@string/_8"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -96,7 +96,7 @@
             android:layout_toEndOf="@+id/buttonFour"
             android:id="@+id/buttonEight"/>
     <Button
-            android:text="9"
+            android:text="@string/_9"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -105,65 +105,81 @@
             android:layout_toEndOf="@+id/buttonFive"
             android:id="@+id/buttonNine"/>
     <Button
-            android:text="x"
+            android:text="@string/multiple"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_above="@+id/buttonSix"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_above="@+id/buttonSix"
             android:layout_toEndOf="@+id/buttonSix" android:id="@+id/buttonMultiplication"/>
     <Button
-            android:text="-"
+            android:text="@string/minus"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
             android:id="@+id/buttonSubtraction" android:layout_above="@+id/buttonThree" android:layout_toEndOf="@+id/buttonThree"/>
     <Button
-            android:text="+"
+            android:text="@string/plus"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
             android:layout_alignBottom="@+id/buttonThree"
             android:layout_toEndOf="@+id/buttonThree"
             android:id="@+id/buttonAddition"/>
     <Button
-            android:text=","
+            android:text="@string/dot"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_alignBottom="@+id/buttonZero"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_alignBottom="@+id/buttonZero"
             android:layout_toEndOf="@+id/buttonZero" android:id="@+id/buttonDot"/>
     <Button
-            android:text="="
+            android:text="@string/equality"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_alignBottom="@+id/buttonDot"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_alignBottom="@+id/buttonDot"
             android:layout_toEndOf="@+id/buttonDot" android:id="@+id/buttonEquality"/>
     <Button
-            android:text="AC"
+            android:text="@string/clear"
             android:background="@drawable/dark_gray_button"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_above="@+id/buttonSeven"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_above="@+id/buttonSeven"
             android:layout_alignParentStart="true" android:id="@+id/buttonClear"/>
     <Button
-            android:text="+/-"
+            android:text="@string/plus_minus"
             android:background="@drawable/dark_gray_button"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_above="@+id/buttonSeven"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_above="@+id/buttonSeven"
             android:layout_toEndOf="@+id/buttonSeven" android:id="@+id/buttonSign"/>
     <Button
-            android:text="%"
+            android:text="@string/percent"
             android:background="@drawable/dark_gray_button"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_above="@+id/buttonEight"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_above="@+id/buttonEight"
             android:layout_toEndOf="@+id/buttonEight" android:id="@+id/buttonPercent"/>
     <Button
-            android:text="/"
+            android:text="@string/division"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
-            android:layout_height="60dp" android:layout_above="@+id/buttonNine"
+            android:layout_height="60dp"
+            android:onClick="onOperationButtonClick"
+            android:layout_above="@+id/buttonNine"
             android:layout_toEndOf="@+id/buttonPercent" android:id="@+id/buttonDivision"/>
     <TextView
             android:gravity="right"
@@ -173,7 +189,7 @@
             android:layout_height="60dp" android:layout_above="@+id/buttonClear"
             android:layout_alignParentStart="true" android:id="@+id/result"/>
     <Button
-            android:text="Привет, чепуш"
+            android:text="@string/chepush"
             android:background="@android:color/holo_blue_bright"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
