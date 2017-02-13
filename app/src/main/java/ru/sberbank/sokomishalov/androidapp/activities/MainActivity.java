@@ -11,6 +11,7 @@ import ru.sberbank.sokomishalov.androidapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,12 +19,19 @@ public class MainActivity extends AppCompatActivity {
     private List<Button> numberButtons;
     private List<Button> operationButtons;
 
+    private Number firstOperand;
+    private String operation;
+
+    private static final Integer NUMBER_MAX_COUNT = 10;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.textView = (TextView) findViewById(R.id.result);
+        this.firstOperand = 0;
+        this.operation = "";
         fillNumberButtons();
         fillOperationButtons();
         setSupportActionBar(toolbar);
@@ -35,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNumberButtonClick(View view){
+        if (this.textView.getText().length() >= NUMBER_MAX_COUNT) return;
         for (Button numberButton : numberButtons) {
             if (numberButton.getId() == view.getId()){
                 this.textView.setText(this.textView.getText().toString() + "" + numberButton.getText().toString());
@@ -44,8 +53,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onOperationButtonClick(View view){
         for (Button operationButton : operationButtons) {
+            if (operationButton.isPressed()) operationButton.setPressed(false);
             if (operationButton.getId() == view.getId()){
-                this.textView.setText(this.textView.getText().toString() + "" + operationButton.getText().toString());
+                operationButton.setPressed(true);
+//                this.firstOperand = (Number) this.textView.getText();
+//                this.operation = operationButton.getText().toString();
             }
         }
     }
