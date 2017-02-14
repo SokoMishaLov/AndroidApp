@@ -3,6 +3,7 @@ package ru.sberbank.sokomishalov.androidapp.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,30 +12,30 @@ import ru.sberbank.sokomishalov.androidapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView textView;
+    private TextView result;
     private List<Button> numberButtons;
     private List<Button> operationButtons;
 
-    private Number firstOperand;
-    private String operation;
-
+    private static final String TAG = MainActivity.class.getSimpleName();
     private static final Integer NUMBER_MAX_COUNT = 10;
+    private static Integer firstOperand = 0;
+    private static Integer secondOperand = 0;
+    private static String operation = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        this.textView = (TextView) findViewById(R.id.result);
-        this.firstOperand = 0;
-        this.operation = "";
+        this.result = (TextView) findViewById(R.id.result);
+        this.result.setText(String.valueOf(firstOperand));
         fillNumberButtons();
         fillOperationButtons();
         setSupportActionBar(toolbar);
+        Log.d(TAG,"Activity created");
     }
 
     public void onHelloButtonClick(View view){
@@ -43,22 +44,68 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNumberButtonClick(View view){
-        if (this.textView.getText().length() >= NUMBER_MAX_COUNT) return;
+        if (this.result.getText().length() >= NUMBER_MAX_COUNT) return;
+
+        boolean anyPressed = false;
+        for (Button operationButton : operationButtons) {
+            if (operationButton.isSelected()){
+                operationButton.setSelected(false);
+                operation = operationButton.getText().toString();
+                anyPressed = true;
+            }
+        }
+
         for (Button numberButton : numberButtons) {
             if (numberButton.getId() == view.getId()){
-                this.textView.setText(this.textView.getText().toString() + "" + numberButton.getText().toString());
+                if (anyPressed || this.result.getText().equals("0")){
+                   this.result.setText(numberButton.getText());
+                } else {
+                    this.result.setText(this.result.getText().toString() + "" + numberButton.getText().toString());
+                }
             }
         }
     }
 
     public void onOperationButtonClick(View view){
         for (Button operationButton : operationButtons) {
-            if (operationButton.isPressed()) operationButton.setPressed(false);
-            if (operationButton.getId() == view.getId()){
-                operationButton.setPressed(true);
-//                this.firstOperand = (Number) this.textView.getText();
-//                this.operation = operationButton.getText().toString();
+            if (operationButton.getId() == view.getId()) {
+                Log.d(TAG, operationButton.getText() + " set pressed");
+                operationButton.setSelected(true);
+                if (secondOperand.equals(0)) {
+                    operation = operationButton.getText().toString();
+                    firstOperand = Integer.parseInt(result.getText().toString());
+                    operate();
+                } else {
+                    secondOperand = Integer.parseInt(result.getText().toString());
+                    operate();
+                }
             }
+        }
+    }
+
+    private void operate() {
+        if (operation.equals(getResources().getString(R.string.operation_clear))){
+            this.result.setText("0");
+        } else if (operation.equals(getResources().getString(R.string.operation_plus_minus))){
+            if (this.result.getText().toString().charAt(0) == '-'){
+                this.result.setText(this.result.getText().subSequence(1,this.result.getText().length()-1));
+            } else {
+                this.result.setText("-" + "" + this.result.getText());
+            }
+        } else if (operation.equals(getResources().getString(R.string.operation_dot))){
+            this.result.setText(this.result.getText());
+        }  else if (operation.equals(getResources().getString(R.string.operation_percent))){
+            this.result.setText(this.result.getText());
+        } else if (operation.equals(getResources().getString(R.string.operation_multiple))){
+            this.result.setText(this.result.getText());
+        } else if (operation.equals(getResources().getString(R.string.operation_division))){
+            this.result.setText(this.result.getText());
+        } else if (operation.equals(getResources().getString(R.string.operation_plus))){
+            this.result.setText(this.result.getText());
+        } else if (operation.equals(getResources().getString(R.string.operation_minus))){
+            this.result.setText(this.result.getText());
+        } else if (operation.equals(getResources().getString(R.string.operation_equality))){
+            this.result.setText(this.result.getText());
         }
     }
 
@@ -80,8 +127,8 @@ public class MainActivity extends AppCompatActivity {
         this.operationButtons = new ArrayList<>();
         this.operationButtons.add((Button) findViewById(R.id.buttonMultiplication));
         this.operationButtons.add((Button) findViewById(R.id.buttonDivision));
-        this.operationButtons.add((Button) findViewById(R.id.buttonAddition));
-        this.operationButtons.add((Button) findViewById(R.id.buttonSubtraction));
+        this.operationButtons.add((Button) findViewById(R.id.buttonPlus));
+        this.operationButtons.add((Button) findViewById(R.id.buttonMinus));
         this.operationButtons.add((Button) findViewById(R.id.buttonDot));
         this.operationButtons.add((Button) findViewById(R.id.buttonEquality));
         this.operationButtons.add((Button) findViewById(R.id.buttonClear));

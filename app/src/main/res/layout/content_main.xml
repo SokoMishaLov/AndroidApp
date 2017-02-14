@@ -105,7 +105,7 @@
             android:layout_toEndOf="@+id/buttonFive"
             android:id="@+id/buttonNine"/>
     <Button
-            android:text="@string/multiple"
+            android:text="@string/operation_multiple"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
@@ -114,15 +114,15 @@
             android:layout_above="@+id/buttonSix"
             android:layout_toEndOf="@+id/buttonSix" android:id="@+id/buttonMultiplication"/>
     <Button
-            android:text="@string/minus"
+            android:text="@string/operation_minus"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:onClick="onOperationButtonClick"
-            android:id="@+id/buttonSubtraction" android:layout_above="@+id/buttonThree" android:layout_toEndOf="@+id/buttonThree"/>
+            android:id="@+id/buttonMinus" android:layout_above="@+id/buttonThree" android:layout_toEndOf="@+id/buttonThree"/>
     <Button
-            android:text="@string/plus"
+            android:text="@string/operation_plus"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
@@ -130,9 +130,9 @@
             android:onClick="onOperationButtonClick"
             android:layout_alignBottom="@+id/buttonThree"
             android:layout_toEndOf="@+id/buttonThree"
-            android:id="@+id/buttonAddition"/>
+            android:id="@+id/buttonPlus"/>
     <Button
-            android:text="@string/dot"
+            android:text="@string/operation_dot"
             android:background="@drawable/gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -140,7 +140,7 @@
             android:layout_alignBottom="@+id/buttonZero"
             android:layout_toEndOf="@+id/buttonZero" android:id="@+id/buttonDot"/>
     <Button
-            android:text="@string/equality"
+            android:text="@string/operation_equality"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
@@ -149,7 +149,7 @@
             android:layout_alignBottom="@+id/buttonDot"
             android:layout_toEndOf="@+id/buttonDot" android:id="@+id/buttonEquality"/>
     <Button
-            android:text="@string/clear"
+            android:text="@string/operation_clear"
             android:background="@drawable/dark_gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -157,7 +157,7 @@
             android:layout_above="@+id/buttonSeven"
             android:layout_alignParentStart="true" android:id="@+id/buttonClear"/>
     <Button
-            android:text="@string/plus_minus"
+            android:text="@string/operation_plus_minus"
             android:background="@drawable/dark_gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -165,7 +165,7 @@
             android:layout_above="@+id/buttonSeven"
             android:layout_toEndOf="@+id/buttonSeven" android:id="@+id/buttonSign"/>
     <Button
-            android:text="@string/percent"
+            android:text="@string/operation_percent"
             android:background="@drawable/dark_gray_button"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -173,7 +173,7 @@
             android:layout_above="@+id/buttonEight"
             android:layout_toEndOf="@+id/buttonEight" android:id="@+id/buttonPercent"/>
     <Button
-            android:text="@string/division"
+            android:text="@string/operation_division"
             android:background="@drawable/orange_button"
             android:textColor="@android:color/white"
             android:layout_width="60dp"
