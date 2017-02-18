@@ -19,10 +19,13 @@ public class MainActivity extends AppCompatActivity {
     private List<Button> numberButtons;
     private List<Button> operationButtons;
 
+    private ButtonHelper buttonHelper = new ButtonHelper();
+    private MathHelper mathHelper = new MathHelper();
+
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final Integer NUMBER_MAX_COUNT = 10;
-    private static Integer firstOperand = 0;
-    private static Integer secondOperand = 0;
+    private static Number firstOperand = 0;
+    private static Number secondOperand = 0;
     private static String operation = "";
 
     @Override
@@ -32,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.result = (TextView) findViewById(R.id.result);
         this.result.setText(String.valueOf(firstOperand));
-        fillNumberButtons();
-        fillOperationButtons();
+        this.buttonHelper.fillNumberButtons();
+        this.buttonHelper.fillOperationButtons();
         setSupportActionBar(toolbar);
         Log.d(TAG,"Activity created");
     }
@@ -57,8 +60,12 @@ public class MainActivity extends AppCompatActivity {
 
         for (Button numberButton : numberButtons) {
             if (numberButton.getId() == view.getId()){
-                if (anyPressed || this.result.getText().equals("0")){
+                if (this.result.getText().equals("0")){
                    this.result.setText(numberButton.getText());
+                } else if (anyPressed) {
+                   this.result.setText(numberButton.getText());
+                   //second operand is not equal 0 any more
+                   secondOperand = 1;
                 } else {
                     this.result.setText(this.result.getText().toString() + "" + numberButton.getText().toString());
                 }
@@ -69,70 +76,101 @@ public class MainActivity extends AppCompatActivity {
     public void onOperationButtonClick(View view){
         for (Button operationButton : operationButtons) {
             if (operationButton.getId() == view.getId()) {
-                Log.d(TAG, operationButton.getText() + " set pressed");
+                Log.d(TAG, operationButton.getText() + " pressed");
                 operationButton.setSelected(true);
                 if (secondOperand.equals(0)) {
                     operation = operationButton.getText().toString();
-                    firstOperand = Integer.parseInt(result.getText().toString());
-                    operate();
+                    firstOperand = this.mathHelper.getNumberValueOfTextView();
+                    Log.d(TAG, "first operand" + firstOperand);
                 } else {
-                    secondOperand = Integer.parseInt(result.getText().toString());
-                    operate();
+                    secondOperand = this.mathHelper.getNumberValueOfTextView();
+                    Log.d(TAG, "second operand" + secondOperand);
                 }
+                this.mathHelper.operate(operationButton);
             }
+
         }
     }
 
-    private void operate() {
-        if (operation.equals(getResources().getString(R.string.operation_clear))){
-            this.result.setText("0");
-        } else if (operation.equals(getResources().getString(R.string.operation_plus_minus))){
-            if (this.result.getText().toString().charAt(0) == '-'){
-                this.result.setText(this.result.getText().subSequence(1,this.result.getText().length()-1));
-            } else {
-                this.result.setText("-" + "" + this.result.getText());
+    private class MathHelper {
+
+        private Number getNumberValueOfTextView(){
+            return result.getText().length() != 0 ? 0 :
+                    (result.getText().toString().contains(getResources().getString(R.string.operation_dot)) ?
+                            Double.parseDouble(result.getText().toString()) :
+                            Integer.parseInt(result.getText().toString()));
+        }
+
+        private void operate(Button operationButton) {
+            if (operation.equals(getResources().getString(R.string.operation_clear))){
+                result.setText("0");
+                firstOperand = 0;
+                secondOperand = 0;
+                operation = "";
+                operationButton.setSelected(false);
+            } else if (operation.equals(getResources().getString(R.string.operation_plus_minus))){
+                if (result.getText().toString().charAt(0) == '-'){
+                    result.setText(result.getText().subSequence(1,result.getText().length()));
+                } else if (result.getText().equals("0")) {
+                    result.setText(result.getText());
+                } else {
+                    result.setText("-" + "" + result.getText());
+                }
+                operation = "";
+                operationButton.setSelected(false);
+            } else if (operation.equals(getResources().getString(R.string.operation_dot))){
+                if (!result.getText().toString().contains(getResources().getString(R.string.operation_dot))) {
+                    result.setText(result.getText() + "" + getResources().getString(R.string.operation_dot));
+                }
+                operation = "";
+                operationButton.setSelected(false);
+            }  else if (operation.equals(getResources().getString(R.string.operation_percent))){
+                result.setText(result.getText());
+            } else if (operation.equals(getResources().getString(R.string.operation_multiple))){
+                result.setText(result.getText());
+            } else if (operation.equals(getResources().getString(R.string.operation_division))){
+                result.setText(result.getText());
+            } else if (operation.equals(getResources().getString(R.string.operation_plus))){
+                result.setText(result.getText());
+            } else if (operation.equals(getResources().getString(R.string.operation_minus))){
+                result.setText(result.getText());
+            } else if (operation.equals(getResources().getString(R.string.operation_equality))){
+                result.setText(result.getText());
             }
-        } else if (operation.equals(getResources().getString(R.string.operation_dot))){
-            this.result.setText(this.result.getText());
-        }  else if (operation.equals(getResources().getString(R.string.operation_percent))){
-            this.result.setText(this.result.getText());
-        } else if (operation.equals(getResources().getString(R.string.operation_multiple))){
-            this.result.setText(this.result.getText());
-        } else if (operation.equals(getResources().getString(R.string.operation_division))){
-            this.result.setText(this.result.getText());
-        } else if (operation.equals(getResources().getString(R.string.operation_plus))){
-            this.result.setText(this.result.getText());
-        } else if (operation.equals(getResources().getString(R.string.operation_minus))){
-            this.result.setText(this.result.getText());
-        } else if (operation.equals(getResources().getString(R.string.operation_equality))){
-            this.result.setText(this.result.getText());
+        }
+
+    }
+
+    private class ButtonHelper {
+
+        private void fillNumberButtons(){
+            numberButtons = new ArrayList<>();
+            numberButtons.add((Button) findViewById(R.id.buttonZero));
+            numberButtons.add((Button) findViewById(R.id.buttonOne));
+            numberButtons.add((Button) findViewById(R.id.buttonTwo));
+            numberButtons.add((Button) findViewById(R.id.buttonThree));
+            numberButtons.add((Button) findViewById(R.id.buttonFour));
+            numberButtons.add((Button) findViewById(R.id.buttonFive));
+            numberButtons.add((Button) findViewById(R.id.buttonSix));
+            numberButtons.add((Button) findViewById(R.id.buttonSeven));
+            numberButtons.add((Button) findViewById(R.id.buttonEight));
+            numberButtons.add((Button) findViewById(R.id.buttonNine));
+        }
+
+        private void fillOperationButtons(){
+            operationButtons = new ArrayList<>();
+            operationButtons.add((Button) findViewById(R.id.buttonMultiplication));
+            operationButtons.add((Button) findViewById(R.id.buttonDivision));
+            operationButtons.add((Button) findViewById(R.id.buttonPlus));
+            operationButtons.add((Button) findViewById(R.id.buttonMinus));
+            operationButtons.add((Button) findViewById(R.id.buttonDot));
+            operationButtons.add((Button) findViewById(R.id.buttonEquality));
+            operationButtons.add((Button) findViewById(R.id.buttonClear));
+            operationButtons.add((Button) findViewById(R.id.buttonSign));
+            operationButtons.add((Button) findViewById(R.id.buttonPercent));
         }
     }
 
-    private void fillNumberButtons(){
-        this.numberButtons = new ArrayList<>();
-        this.numberButtons.add((Button) findViewById(R.id.buttonZero));
-        this.numberButtons.add((Button) findViewById(R.id.buttonOne));
-        this.numberButtons.add((Button) findViewById(R.id.buttonTwo));
-        this.numberButtons.add((Button) findViewById(R.id.buttonThree));
-        this.numberButtons.add((Button) findViewById(R.id.buttonFour));
-        this.numberButtons.add((Button) findViewById(R.id.buttonFive));
-        this.numberButtons.add((Button) findViewById(R.id.buttonSix));
-        this.numberButtons.add((Button) findViewById(R.id.buttonSeven));
-        this.numberButtons.add((Button) findViewById(R.id.buttonEight));
-        this.numberButtons.add((Button) findViewById(R.id.buttonNine));
-    }
 
-    private void fillOperationButtons(){
-        this.operationButtons = new ArrayList<>();
-        this.operationButtons.add((Button) findViewById(R.id.buttonMultiplication));
-        this.operationButtons.add((Button) findViewById(R.id.buttonDivision));
-        this.operationButtons.add((Button) findViewById(R.id.buttonPlus));
-        this.operationButtons.add((Button) findViewById(R.id.buttonMinus));
-        this.operationButtons.add((Button) findViewById(R.id.buttonDot));
-        this.operationButtons.add((Button) findViewById(R.id.buttonEquality));
-        this.operationButtons.add((Button) findViewById(R.id.buttonClear));
-        this.operationButtons.add((Button) findViewById(R.id.buttonSign));
-        this.operationButtons.add((Button) findViewById(R.id.buttonPercent));
-    }
+
 }

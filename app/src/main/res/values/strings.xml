@@ -15,9 +15,9 @@
     <string name="operation_multiple">x</string>
     <string name="operation_minus">-</string>
     <string name="operation_plus">+</string>
-    <string name="operation_dot">,</string>
+    <string name="operation_dot">.</string>
     <string name="operation_equality">=</string>
-    <string name="operation_clear">C</string>
+    <string name="operation_clear">AC</string>
     <string name="operation_plus_minus">+/-</string>
     <string name="operation_percent">%</string>
     <string name="operation_division">/</string>
