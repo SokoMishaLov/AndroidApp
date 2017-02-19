@@ -96,8 +96,14 @@ public class MainActivity extends AppCompatActivity {
             return result.getText().toString().length() == 0 ? 0. : Double.parseDouble(result.getText().toString());
         }
 
-        private String getStringValueFromDouble(Double value){
-            return String.valueOf(Double.parseDouble(String.valueOf(value)));
+        private void setResultStringValueFromDouble(Double value){
+            Log.d(TAG, value.toString());
+
+            if (value - value.intValue() < Double.MIN_VALUE){
+                result.setText(String.valueOf(value.intValue()));
+            } else {
+                result.setText(String.valueOf(value));
+            }
         }
 
 
@@ -146,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // setting value by 1% of first operand
 
-                result.setText(getStringValueFromDouble(firstOperand /100));
+                setResultStringValueFromDouble(firstOperand /100);
                 firstOperator = "";
 
             } else if (secondOperator.equals(getResources().getString(R.string.operation_percent))){
@@ -157,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // multiply percent of first operand
 
-                    result.setText(getStringValueFromDouble(firstOperand * ((firstOperand * secondOperand / 100))));
+                    setResultStringValueFromDouble(firstOperand * ((firstOperand * secondOperand / 100)));
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
@@ -165,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // divide percent of first operand
 
-                    result.setText(getStringValueFromDouble(firstOperand / ((firstOperand * secondOperand / 100))));
+                    setResultStringValueFromDouble(firstOperand / ((firstOperand * secondOperand / 100)));
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
@@ -173,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // sum percent of first operand
 
-                    result.setText(getStringValueFromDouble(firstOperand + ((firstOperand * secondOperand / 100))));
+                    setResultStringValueFromDouble(firstOperand + ((firstOperand * secondOperand / 100)));
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
@@ -181,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // residual percent of first operand
 
-                    result.setText(getStringValueFromDouble(firstOperand - ((firstOperand * secondOperand / 100))));
+                    setResultStringValueFromDouble(firstOperand - ((firstOperand * secondOperand / 100)));
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
@@ -199,28 +205,28 @@ public class MainActivity extends AppCompatActivity {
 
                 // executing multiple
 
-                result.setText(getStringValueFromDouble(firstOperand * secondOperand));
+                setResultStringValueFromDouble(firstOperand * secondOperand);
                 mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_division))){
 
                 // executing division
 
-                result.setText(getStringValueFromDouble(firstOperand / secondOperand));
+                setResultStringValueFromDouble(firstOperand / secondOperand);
                 mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))){
 
                 // executing sum
 
-                result.setText(getStringValueFromDouble(firstOperand + secondOperand));
+                setResultStringValueFromDouble(firstOperand + secondOperand);
                 mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))){
 
                 // executing residual
 
-                result.setText(getStringValueFromDouble(firstOperand - secondOperand));
+                setResultStringValueFromDouble(firstOperand - secondOperand);
                 mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_equality))){
