@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             if (numberButton.getId() == view.getId()){
 
                 // if it's starting and zero - rewrite it
-                if ((firstOperator.equals("") && this.result.getText().charAt(0) == '0') || (isSecondOperandExists && reWriteTextViewValue)) {
+                if ((firstOperator.equals("") && this.result.getText().charAt(0) == '0') || (reWriteTextViewValue)) {
                    this.result.setText(numberButton.getText());
                    reWriteTextViewValue = false;
 
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 //clear everything
                 result.setText("0");
                 mathHelper.clearOrInitAllStaticFields();
+                reWriteTextViewValue = true;
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_plus_minus)) || secondOperator.equals(getResources().getString(R.string.operation_plus_minus))){
 
@@ -158,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
                     result.setText(getStringValueFromDouble(firstOperand * ((firstOperand * secondOperand / 100))));
                     mathHelper.clearOrInitAllStaticFields();
+                    reWriteTextViewValue = true;
 
                 } else if (firstOperator.equals(getResources().getString(R.string.operation_division))){
 
@@ -165,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
                     result.setText(getStringValueFromDouble(firstOperand / ((firstOperand * secondOperand / 100))));
                     mathHelper.clearOrInitAllStaticFields();
+                    reWriteTextViewValue = true;
 
                 } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))){
 
@@ -172,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
                     result.setText(getStringValueFromDouble(firstOperand + ((firstOperand * secondOperand / 100))));
                     mathHelper.clearOrInitAllStaticFields();
+                    reWriteTextViewValue = true;
 
                 } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))){
 
@@ -179,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
                     result.setText(getStringValueFromDouble(firstOperand - ((firstOperand * secondOperand / 100))));
                     mathHelper.clearOrInitAllStaticFields();
+                    reWriteTextViewValue = true;
 
                 }
 
@@ -195,40 +200,35 @@ public class MainActivity extends AppCompatActivity {
                 // executing multiple
 
                 result.setText(getStringValueFromDouble(firstOperand * secondOperand));
-                firstOperand  = getDoubleValueOfTextView();
-                firstOperator = secondOperator;
+                mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_division))){
 
                 // executing division
 
                 result.setText(getStringValueFromDouble(firstOperand / secondOperand));
-                firstOperand  = getDoubleValueOfTextView();
-                firstOperator = secondOperator;
+                mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))){
 
                 // executing sum
 
                 result.setText(getStringValueFromDouble(firstOperand + secondOperand));
-                firstOperand  = getDoubleValueOfTextView();
-                firstOperator = secondOperator;
+                mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))){
 
                 // executing residual
 
                 result.setText(getStringValueFromDouble(firstOperand - secondOperand));
-                firstOperand  = getDoubleValueOfTextView();
-                firstOperator = secondOperator;
+                mathHelper.addOperation();
 
             } else if (firstOperator.equals(getResources().getString(R.string.operation_equality))){
 
                 // doing nothing, because it's already done
 
                 result.setText(result.getText());
-                firstOperator = "";
-                secondOperator = "";
+                mathHelper.addOperation();
 
             }
         }
@@ -240,6 +240,12 @@ public class MainActivity extends AppCompatActivity {
             reWriteTextViewValue = false;
             firstOperator = "";
             secondOperator = "";
+        }
+
+        private void addOperation(){
+            firstOperand  = getDoubleValueOfTextView();
+            firstOperator = secondOperator;
+            reWriteTextViewValue = true;
         }
 
     }
