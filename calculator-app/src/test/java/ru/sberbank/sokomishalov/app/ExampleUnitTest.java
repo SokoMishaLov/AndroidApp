@@ -1,4 +1,4 @@
-package ru.sberbank.sokomishalov.androidapp;
+package ru.sberbank.sokomishalov.app;
 
 import org.junit.Test;
 

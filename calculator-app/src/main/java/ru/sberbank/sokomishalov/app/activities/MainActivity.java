@@ -1,19 +1,19 @@
-package ru.sberbank.sokomishalov.androidapp.activities;
+package ru.sberbank.sokomishalov.app.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import ru.sberbank.sokomishalov.androidapp.R;
+import android.widget.Toolbar;
+import ru.sberbank.sokomishalov.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private TextView result;
     private List<Button> numberButtons;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         this.buttonHelper.fillNumberButtons();
         this.buttonHelper.fillOperationButtons();
         this.result.setText(String.valueOf(firstOperand.intValue()));
-        setSupportActionBar(toolbar);
+        setActionBar(toolbar);
         Log.d(TAG,"Activity created");
     }
 

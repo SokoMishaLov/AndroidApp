@@ -1,4 +1,4 @@
-package ru.sberbank.sokomishalov.androidapp;
+package ru.sberbank.sokomishalov.app;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

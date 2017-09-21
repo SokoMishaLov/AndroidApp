@@ -1,4 +1,4 @@
-package ru.sberbank.sokomishalov.androidapp.helpers;
+package ru.sberbank.sokomishalov.app.helpers;
 
 /**
  * Created by SokoMishaLov on 13.02.17.
