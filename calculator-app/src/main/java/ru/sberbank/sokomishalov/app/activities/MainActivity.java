@@ -36,13 +36,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.result = (TextView) findViewById(R.id.result);
         this.mathHelper.clearOrInitAllStaticFields();
         this.buttonHelper.fillNumberButtons();
         this.buttonHelper.fillOperationButtons();
         this.result.setText(String.valueOf(firstOperand.intValue()));
-        setActionBar(toolbar);
         Log.d(TAG,"Activity created");
     }
 
