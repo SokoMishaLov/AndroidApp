@@ -6,8 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 import ru.sberbank.sokomishalov.app.R;
 
 import java.util.ArrayList;
@@ -42,11 +40,6 @@ public class MainActivity extends Activity {
         this.buttonHelper.fillOperationButtons();
         this.result.setText(String.valueOf(firstOperand.intValue()));
         Log.d(TAG,"Activity created");
-    }
-
-    public void onHelloButtonClick(View view){
-        Toast t = Toast.makeText(getApplicationContext(), "Ну здаров, петух", Toast.LENGTH_LONG);
-        t.show();
     }
 
     public void onNumberButtonClick(View view){

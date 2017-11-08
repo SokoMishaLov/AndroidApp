@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">AndroidApp</string>
+    <string name="app_name">Sokomishalov</string>
     <string name="title_activity_main">Sokomishalov</string>
-    <string name="chepush">Привет, чепуш</string>
+    <string name="chepush">Тыкни сюдой</string>
     <string name="_0">0</string>
     <string name="_1">1</string>
     <string name="_2">2</string>
