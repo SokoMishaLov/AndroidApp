@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import ru.sberbank.sokomishalov.app.R;
 
 import java.util.ArrayList;
@@ -39,21 +40,21 @@ public class MainActivity extends Activity {
         this.buttonHelper.fillNumberButtons();
         this.buttonHelper.fillOperationButtons();
         this.result.setText(String.valueOf(firstOperand.intValue()));
-        Log.d(TAG,"Activity created");
+        Log.d(TAG, "Activity created");
     }
 
-    public void onNumberButtonClick(View view){
+    public void onNumberButtonClick(View view) {
         if (this.result.getText().length() >= NUMBER_MAX_COUNT) return;
 
         for (Button numberButton : numberButtons) {
-            if (numberButton.getId() == view.getId()){
+            if (numberButton.getId() == view.getId()) {
 
                 // if it's starting and zero - rewrite it
                 if ((firstOperator.equals("") && this.result.getText().charAt(0) == '0') || (reWriteTextViewValue)) {
-                   this.result.setText(numberButton.getText());
-                   reWriteTextViewValue = false;
+                    this.result.setText(numberButton.getText());
+                    reWriteTextViewValue = false;
 
-                // else add symbol to result string
+                    // else add symbol to result string
                 } else {
                     this.result.setText(this.result.getText().toString() + "" + numberButton.getText().toString());
                 }
@@ -61,7 +62,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    public void onOperationButtonClick(View view){
+    public void onOperationButtonClick(View view) {
         for (Button operationButton : operationButtons) {
             if (operationButton.getId() == view.getId()) {
                 Log.d(TAG, operationButton.getText() + " pressed");
@@ -83,14 +84,14 @@ public class MainActivity extends Activity {
 
     private class MathHelper {
 
-        private Double getDoubleValueOfTextView(){
+        private Double getDoubleValueOfTextView() {
             return result.getText().toString().length() == 0 ? 0. : Double.parseDouble(result.getText().toString());
         }
 
-        private void setResultStringValueFromDouble(Double value){
+        private void setResultStringValueFromDouble(Double value) {
             Log.d(TAG, value.toString());
 
-            if (value - value.intValue() < Double.MIN_VALUE){
+            if (value - value.intValue() < Double.MIN_VALUE) {
                 result.setText(String.valueOf(value.intValue()));
             } else {
                 result.setText(String.valueOf(value));
@@ -98,21 +99,20 @@ public class MainActivity extends Activity {
         }
 
 
-
         private void operate() {
-            if (firstOperator.equals(getResources().getString(R.string.operation_clear)) || secondOperator.equals(getResources().getString(R.string.operation_clear))){
+            if (firstOperator.equals(getResources().getString(R.string.operation_clear)) || secondOperator.equals(getResources().getString(R.string.operation_clear))) {
 
                 //clear everything
                 result.setText("0");
                 mathHelper.clearOrInitAllStaticFields();
                 reWriteTextViewValue = true;
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_plus_minus)) || secondOperator.equals(getResources().getString(R.string.operation_plus_minus))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_plus_minus)) || secondOperator.equals(getResources().getString(R.string.operation_plus_minus))) {
 
                 //add a sign to operand
 
-                if (result.getText().toString().charAt(0) == '-'){
-                    result.setText(result.getText().subSequence(1,result.getText().length()));
+                if (result.getText().toString().charAt(0) == '-') {
+                    result.setText(result.getText().subSequence(1, result.getText().length()));
                 } else if (result.getText().equals("0")) {
                     result.setText(result.getText());
                 } else {
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
                     firstOperator = "";
                 }
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_dot)) || secondOperator.equals(getResources().getString(R.string.operation_dot))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_dot)) || secondOperator.equals(getResources().getString(R.string.operation_dot))) {
 
                 //convert integer to a double by adding dot to operand
 
@@ -133,24 +133,24 @@ public class MainActivity extends Activity {
                     result.setText(result.getText() + "" + getResources().getString(R.string.operation_dot));
                 }
 
-                if (isSecondOperandExists){
+                if (isSecondOperandExists) {
                     secondOperator = "";
                 } else {
                     firstOperator = "";
                 }
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_percent))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_percent))) {
 
                 // setting value by 1% of first operand
 
-                setResultStringValueFromDouble(firstOperand /100);
+                setResultStringValueFromDouble(firstOperand / 100);
                 firstOperator = "";
 
-            } else if (secondOperator.equals(getResources().getString(R.string.operation_percent))){
+            } else if (secondOperator.equals(getResources().getString(R.string.operation_percent))) {
 
                 // executing firstOperator '%' with two operands
 
-                if (firstOperator.equals(getResources().getString(R.string.operation_multiple))){
+                if (firstOperator.equals(getResources().getString(R.string.operation_multiple))) {
 
                     // multiply percent of first operand
 
@@ -158,7 +158,7 @@ public class MainActivity extends Activity {
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
-                } else if (firstOperator.equals(getResources().getString(R.string.operation_division))){
+                } else if (firstOperator.equals(getResources().getString(R.string.operation_division))) {
 
                     // divide percent of first operand
 
@@ -166,7 +166,7 @@ public class MainActivity extends Activity {
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
-                } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))){
+                } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))) {
 
                     // sum percent of first operand
 
@@ -174,7 +174,7 @@ public class MainActivity extends Activity {
                     mathHelper.clearOrInitAllStaticFields();
                     reWriteTextViewValue = true;
 
-                } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))){
+                } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))) {
 
                     // residual percent of first operand
 
@@ -184,7 +184,7 @@ public class MainActivity extends Activity {
 
                 }
 
-            } else if (secondOperator.equals("")){
+            } else if (secondOperator.equals("")) {
 
                 // if second operator is not clicked by this time -
                 // clearing input field, quit and waiting for input second operand
@@ -192,35 +192,35 @@ public class MainActivity extends Activity {
                 isSecondOperandExists = true;
                 reWriteTextViewValue = true;
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_multiple))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_multiple))) {
 
                 // executing multiple
 
                 setResultStringValueFromDouble(firstOperand * secondOperand);
                 mathHelper.addOperation();
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_division))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_division))) {
 
                 // executing division
 
                 setResultStringValueFromDouble(firstOperand / secondOperand);
                 mathHelper.addOperation();
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_plus))) {
 
                 // executing sum
 
                 setResultStringValueFromDouble(firstOperand + secondOperand);
                 mathHelper.addOperation();
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_minus))) {
 
                 // executing residual
 
                 setResultStringValueFromDouble(firstOperand - secondOperand);
                 mathHelper.addOperation();
 
-            } else if (firstOperator.equals(getResources().getString(R.string.operation_equality))){
+            } else if (firstOperator.equals(getResources().getString(R.string.operation_equality))) {
 
                 // doing nothing, because it's already done
 
@@ -230,7 +230,7 @@ public class MainActivity extends Activity {
             }
         }
 
-        private void clearOrInitAllStaticFields(){
+        private void clearOrInitAllStaticFields() {
             firstOperand = 0.;
             secondOperand = 0.;
             isSecondOperandExists = false;
@@ -239,8 +239,8 @@ public class MainActivity extends Activity {
             secondOperator = "";
         }
 
-        private void addOperation(){
-            firstOperand  = getDoubleValueOfTextView();
+        private void addOperation() {
+            firstOperand = getDoubleValueOfTextView();
             firstOperator = secondOperator;
             reWriteTextViewValue = true;
         }
@@ -249,7 +249,7 @@ public class MainActivity extends Activity {
 
     private class ButtonHelper {
 
-        private void fillNumberButtons(){
+        private void fillNumberButtons() {
             numberButtons = new ArrayList<>();
             numberButtons.add((Button) findViewById(R.id.buttonZero));
             numberButtons.add((Button) findViewById(R.id.buttonOne));
@@ -263,7 +263,7 @@ public class MainActivity extends Activity {
             numberButtons.add((Button) findViewById(R.id.buttonNine));
         }
 
-        private void fillOperationButtons(){
+        private void fillOperationButtons() {
             operationButtons = new ArrayList<>();
             operationButtons.add((Button) findViewById(R.id.buttonMultiplication));
             operationButtons.add((Button) findViewById(R.id.buttonDivision));
@@ -276,7 +276,6 @@ public class MainActivity extends Activity {
             operationButtons.add((Button) findViewById(R.id.buttonPercent));
         }
     }
-
 
 
 }
