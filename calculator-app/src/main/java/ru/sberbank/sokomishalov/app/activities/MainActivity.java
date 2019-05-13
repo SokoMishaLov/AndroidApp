@@ -24,12 +24,12 @@ public class MainActivity extends Activity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final Integer NUMBER_MAX_COUNT = 10;
 
-    private static Double firstOperand;
-    private static Double secondOperand;
-    private static String firstOperator;
-    private static String secondOperator;
-    private static Boolean isSecondOperandExists;
-    private static Boolean reWriteTextViewValue;
+    private Double firstOperand;
+    private Double secondOperand;
+    private String firstOperator;
+    private String secondOperator;
+    private Boolean isSecondOperandExists;
+    private Boolean reWriteTextViewValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
